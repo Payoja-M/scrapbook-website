@@ -1,6 +1,7 @@
-.board-view-container {
+/* BoardView.css */
+.board-view {
+    background: #fff8f2;
     min-height: 100vh;
-    background-color: #ffffff;
     padding: 2rem;
     font-family: 'MyHandwriting', cursive;
   }
@@ -8,46 +9,65 @@
   .board-title {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     animation: fadeInDown 0.6s ease-in-out;
   }
   
-  .scrapboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1rem;
-  }
-  
-  .scrap-card {
-    background: #ffffff;
-    border: 2px dashed #ffcbcb;
-    border-radius: 16px;
-    padding: 1rem;
-    width: 240px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-  }
-  
-  .scrap-card:hover {
-    transform: rotate(-1deg) scale(1.02);
-  }
-  
-  .scrap-image {
+  .board-grid {
+    position: relative;
     width: 100%;
-    border-radius: 12px;
-    margin-bottom: 0.75rem;
+    height: 80vh;
+    border: 2px dashed #f7caca;
+    background: #ffffff;
+    overflow: hidden;
   }
   
-  .scrap-caption {
+  .rnd-wrapper {
+    background: #fff;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .board-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: auto;
+  }
+  
+  .caption-wrapper {
+    z-index: 2;
+    border: 1px #ffcce0;
+    background-color: #fff0f5;
+    overflow: hidden;
+    padding: 0.25rem;
+  }
+  
+  .caption-wrapper .board-caption {
+    font-size: 1rem;
     text-align: center;
-    font-size: 1.1rem;
-    color: #444;
-    font-family: 'MyHandwriting', cursive;
+    margin: 0;
+    padding: 0.5rem;
+    cursor: grab;
+    height: 100%;
+    width: 100%;
   }
   
-  /* Optional animation */
+  .caption-wrapper .board-caption:active {
+    cursor: grabbing;
+  }
+  
+  .react-resizable-handle {
+    width: 12px;
+    height: 12px;
+    background: #ffd3e2;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    cursor: se-resize;
+  }
+  
   @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
