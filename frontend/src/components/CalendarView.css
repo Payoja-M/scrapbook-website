@@ -1,53 +1,192 @@
-.full-screen {
-  height: 100vh;
-  width: 100vw;
+.calendar-fullscreen {
+  min-height: 100vh;
+  background: #ffffff;
   padding: 2rem;
-  background: #fff8f5;
-  overflow-y: auto;
-}
-
-.page-title {
   font-family: 'MyHandwriting', cursive;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 1rem;
 }
 
-.calendar-content {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  align-items: flex-start;
+.calendar-header {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.6s ease-in-out;
 }
 
 .styled-calendar {
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  background-color: #fff;
-  padding: 1rem;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: inherit;
 }
 
-.entries-container {
+.calendar-entries {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .entry-card {
   background: #ffffff;
+  border-radius: 0rem;
   padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  animation: fadeIn 0.6s ease-in;
+  width: 260px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.5s ease;
 }
 
 .entry-image {
-  max-width: 300px;
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
+  width: 100%;
+  border-radius: 0px;
+  margin-bottom: 0.75rem;
 }
 
-@keyframes fadeIn {
+.no-entry-text {
+  text-align: center;
+  font-style: italic;
+  color: #999;
+  margin-top: 2rem;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  border: none;
+  color: #5c5c5c;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.react-calendar__navigation button:hover {
+  transform: scale(1.1);
+  color: #222;
+}
+
+.react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #000435;
+  font-size: 0.85rem;
+}
+
+.react-calendar__tile {
+  padding: 0.8rem 0;
+  background: transparent;
+  border-radius: 0px;
+  font-size: 1rem;
+  color: #444;
+  transition: background 0.2s ease;
+}
+
+.react-calendar__tile--active {
+  background: #fcd3da !important;
+  color: #000 !important;
+  font-weight: bold;
+}
+
+.react-calendar__tile--now {
+  background: #fff8d6;
+  color: #000;
+  font-weight: bold;
+  border: 2px dashed #ffcbcb;
+}
+
+.react-calendar__tile:hover {
+  background-color: #ffeaea;
+  cursor: pointer;
+}
+
+.react-calendar__tile--hasActive {
+  background: #ffdddd !important;
+}
+
+.calendar-wrapper {
+  position: relative;
+  width: 600px;
+  height: 500px;
+  background-size: contain;
+  margin: 0 auto;
+}
+
+.react-calendar {
+  position: absolute;
+  top: 170px; /* adjust these to fit the screen */
+  left: 250px;
+  width: 375px;
+  height: auto;
+  background-color: transparent;
+  border-radius: 0px;
+  box-shadow: none;
+  font-family: 'MyHandwriting', cursive;
+  border: none;
+}
+
+.file-container {
+  text-align: center;
+  margin-top: 1rem;
+  cursor: pointer;
+  animation: dropFile 0.6s ease;
+}
+
+.file-icon {
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.file-icon:hover {
+  transform: scale(1.1);
+}
+
+@keyframes dropFile {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+.entry-dot {
+  margin-top: 3px;
+  width: 8px;
+  height: 8px;
+  background-color: #770737;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }

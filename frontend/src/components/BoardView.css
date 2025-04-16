@@ -1,0 +1,55 @@
+.board-view-container {
+    min-height: 100vh;
+    background-color: #ffffff;
+    padding: 2rem;
+    font-family: 'MyHandwriting', cursive;
+  }
+  
+  .board-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    animation: fadeInDown 0.6s ease-in-out;
+  }
+  
+  .scrapboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+  }
+  
+  .scrap-card {
+    background: #ffffff;
+    border: 2px dashed #ffcbcb;
+    border-radius: 16px;
+    padding: 1rem;
+    width: 240px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .scrap-card:hover {
+    transform: rotate(-1deg) scale(1.02);
+  }
+  
+  .scrap-image {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+  }
+  
+  .scrap-caption {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #444;
+    font-family: 'MyHandwriting', cursive;
+  }
+  
+  /* Optional animation */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  

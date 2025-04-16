@@ -35,6 +35,11 @@ def get_entries():
         entries = Entry.query.order_by(Entry.date.desc()).all()
     return jsonify([entry.to_dict() for entry in entries])
 
+@app.route('/entries/dates')
+def get_entry_dates():
+    dates = db.session.query(Entry.date).distinct().all()
+    return jsonify([date[0].isoformat() for date in dates])
+
 # -----------------------------
 # POST /entries → Add a new entry
 # -----------------------------
