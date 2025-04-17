@@ -189,4 +189,14 @@
   border-radius: 50%;
   margin-left: auto;
   margin-right: auto;
+  display: block; /* ✅ force it to take space */
+}
+
+.delete-button-calendar {
+  background: none;
+  color: #770737;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
 }

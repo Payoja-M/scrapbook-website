@@ -47,8 +47,8 @@ function CalendarView() {
   };
 
   useEffect(() => {
-    fetchEntries(selectedDate);
     fetchEntryDates();
+    fetchEntries(selectedDate);
   }, [selectedDate]);
 
   return (
@@ -85,6 +85,17 @@ function CalendarView() {
                   />
                 )}
                 <p className="handwritten">{entry.description}</p>
+
+                <button
+                  className="delete-button-calendar"
+                  onClick={async () => {
+                    await axios.delete(`http://localhost:5000/entries/${entry.id}`);
+                    setEntries(prev => prev.filter(e => e.id !== entry.id));
+                    setEntryDates(prev => prev.filter(d => d !== entry.date));
+                  }}
+                >
+                  🗑️ Delete
+                </button>
               </div>
             ))}
           </div>

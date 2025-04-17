@@ -1,4 +1,3 @@
-// BoardView.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Rnd } from 'react-rnd';
@@ -14,9 +13,14 @@ function BoardView() {
   }, []);
 
   const updateEntry = (id, updates) => {
+    // update local state immediately
     setEntries(prev =>
       prev.map(entry => entry.id === id ? { ...entry, ...updates } : entry)
     );
+
+    // send patch to backend
+    axios.patch(`http://localhost:5000/entries/${id}`, updates)
+      .catch(err => console.error('Failed to update entry:', err));
   };
 
   return (
@@ -44,6 +48,14 @@ function BoardView() {
                   })
                 }
                 className="rnd-wrapper"
+
+                onContextMenu={(e) => {
+                    e.preventDefault();
+                    const confirmDelete = window.confirm("Delete this entry from the board?");
+                    if (confirmDelete) {
+                      setEntries(prev => prev.filter(e => e.id !== entry.id));
+                    }
+                  }}
               >
                 <img
                   src={`http://localhost:5000${entry.image_url}`}
@@ -71,6 +83,14 @@ function BoardView() {
                 })
               }
               className="caption-wrapper"
+
+              onContextMenu={(e) => {
+                e.preventDefault();
+                const confirmDelete = window.confirm("Delete this entry from the board?");
+                if (confirmDelete) {
+                  setEntries(prev => prev.filter(e => e.id !== entry.id));
+                }
+              }}
             >
               <p className="board-caption">{entry.description}</p>
             </Rnd>
@@ -82,3 +102,4 @@ function BoardView() {
 }
 
 export default BoardView;
+
