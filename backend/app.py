@@ -31,9 +31,20 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 def get_entries():
     date_str = request.args.get('date')  # read date from ?date=YYYY-MM-DD
     if date_str:
-        entries = Entry.query.filter(func.date(Entry.date) == date_str).order_by(Entry.date.desc()).all()
+        entries = Entry.query.filter(
+            func.date(Entry.date) == date_str
+        ).order_by(Entry.date.desc()).all()
     else:
-        entries = Entry.query.order_by(Entry.date.desc()).all()
+        entries = Entry.query.filter(
+            Entry.hidden_from_board == False,
+            Entry.date.isnot(None)
+        ).order_by(Entry.date.desc()).all()
+
+    return jsonify([entry.to_dict() for entry in entries])
+
+@app.route('/entries/all', methods=['GET'])
+def get_all_entries():
+    entries = Entry.query.order_by(Entry.id.desc()).all()
     return jsonify([entry.to_dict() for entry in entries])
 
 @app.route('/entries/dates')
@@ -48,13 +59,14 @@ def get_entry_dates():
 def add_entry():
     description = request.form.get('description')
     date_str = request.form.get('date')
+    text_color = request.form.get('text_color', '#000000')
     file = request.files.get('image')
 
-    if not description:
-        return jsonify({'error': 'Description is required'}), 400
+    if not description and not file:
+        return jsonify({'error': 'At least an image or description is required'}), 400
 
     # Parse or default date
-    date = datetime.strptime(date_str, '%Y-%m-%d') if date_str else datetime.utcnow()
+    date = datetime.strptime(date_str, '%Y-%m-%d') if date_str else None
 
     # Handle image upload
     filename = None
@@ -66,6 +78,8 @@ def add_entry():
     description=description,
     date=date,
     image_filename=filename,
+    hidden_from_board=False,
+    text_color=text_color,
     x=100,
     y=100,
     width=200,
@@ -75,6 +89,7 @@ def add_entry():
     captionWidth=180,
     captionHeight=60
 )
+    print(f"✅ New entry: {entry.to_dict()}")
     db.session.add(entry)
     db.session.commit()
 
@@ -95,9 +110,14 @@ def update_entry(id):
     data = request.get_json()
 
     for field in [
-        "x", "y", "width", "height",
-        "captionX", "captionY", "captionWidth", "captionHeight"
-    ]:
+  "x", "y", "width", "height",
+  "captionX", "captionY", "captionWidth", "captionHeight",
+  "hidden_from_board",
+  "box_visible",
+  "box_color",
+  "text_color",
+  "description"
+]:
         if field in data:
             setattr(entry, field, data[field])
 

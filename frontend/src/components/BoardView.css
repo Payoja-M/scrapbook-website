@@ -1,6 +1,5 @@
-/* BoardView.css */
 .board-view {
-    background: #fff8f2;
+    background: #ffffff;
     min-height: 100vh;
     padding: 2rem;
     font-family: 'MyHandwriting', cursive;
@@ -13,48 +12,80 @@
     animation: fadeInDown 0.6s ease-in-out;
   }
   
+  .show-hidden-btn {
+    padding: 0.9rem 1rem;
+    border: 1px dashed #00226B;
+    background-color: white;
+    color: #444;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .show-hidden-btn:hover {
+    background: #ffeef4;
+    transform: scale(1.02);
+  }
+  
   .board-grid {
+    border: 4px solid #00226B;
+    padding: 2rem;
+    min-height: 80vh;
+    width: 95vw;
+    max-width: none;
+    margin: 0 auto;
     position: relative;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .board-image {
     width: 100%;
-    height: 80vh;
-    border: 2px dashed #f7caca;
-    background: #ffffff;
-    overflow: hidden;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+  
+  .board-caption {
+    background: unset; /* ✅ Let React control it */
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-family: 'MyHandwriting', cursive;
+  }
+  
+  .board-caption.transparent {
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  
+  .caption-wrapper {
+    z-index: 2;
+    overflow: visible !important;
+    padding: 0.25rem;
+    position: relative;
+    background-color: transparent; /* Default to transparent */
+  }
+  
+  .caption-wrapper.box-visible {
+    /* fallback background only if needed */
+    background-color: var(--box-color, #ffeef4); 
+  }
+
+  .caption-wrapper.transparent {
+    background: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
   }
   
   .rnd-wrapper {
     background: #fff;
     overflow: hidden;
     z-index: 1;
-  }
-  
-  .board-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: auto;
-  }
-  
-  .caption-wrapper {
-    z-index: 2;
-    border: 1px #ffcce0;
-    background-color: #fff0f5;
-    overflow: hidden;
-    padding: 0.25rem;
-  }
-  
-  .caption-wrapper .board-caption {
-    font-size: 1rem;
-    text-align: center;
-    margin: 0;
-    padding: 0.5rem;
-    cursor: grab;
-    height: 100%;
-    width: 100%;
-  }
-  
-  .caption-wrapper .board-caption:active {
-    cursor: grabbing;
   }
   
   .react-resizable-handle {
@@ -69,6 +100,54 @@
   }
   
   @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .floating-plus {
+    padding: 0.5rem 1rem;
+    border: 1px dashed #00226B;
+    font-size: 1.2rem;
+    color: hotpink;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .floating-plus:hover {
+    background-color: #ffe6f0;
+  }
+  
+  .insert-menu {
+    display: flex;
+    gap: 0.8rem;
+    background: white;
+    border: 2px solid #ffcce0;
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .board-caption:focus {
+    outline: none;
+    background-color: #fff5f5;
+  }
+
+  .caption-controls {
+    z-index: 10;
+    background: white;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
